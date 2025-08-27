@@ -100,14 +100,22 @@
     {% endif %}
     {% if site.target_blank %}
     <script>
-        function setTarget() {
-            document.querySelectorAll('main a').forEach(link => {
+        function setTarget(element) {
+            document.querySelectorAll(`${element} a`).forEach(link => {
                 if (!link.hasAttribute('target')) {
                     link.setAttribute('target', '_blank');
                 }
             });
         }
-        setTarget();
+        {% if site.target_blank contains "header" %}
+        setTarget('header');
+        {% endif %}
+        {% if site.target_blank contains "main" %}
+        setTarget('main');
+        {% endif %}
+        {% if site.target_blank contains "footer" %}
+        setTarget('footer');
+        {% endif %}
     </script>
     {% endif %}
 </body>
