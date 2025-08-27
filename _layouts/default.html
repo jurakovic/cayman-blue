@@ -98,5 +98,17 @@
         updateTheme();
     </script>
     {% endif %}
+    {% if site.target_blank %}
+    <script>
+        function setTarget() {
+            document.querySelectorAll('main a').forEach(link => {
+                if (!link.hasAttribute('target')) {
+                    link.setAttribute('target', '_blank');
+                }
+            });
+        }
+        setTarget();
+    </script>
+    {% endif %}
 </body>
 </html>
