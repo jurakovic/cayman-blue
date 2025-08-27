@@ -23,7 +23,7 @@ Key differences ([compare](https://github.com/jurakovic/cayman-blue/compare/mast
 | `show_footer` | Boolean | `true` | Controls visibility of the page footer |
 | `custom_css` | Boolean | `false` | Enables loading of custom CSS file |
 | `dark_theme` | Boolean | `false` | Enables dark theme support via [Dark Reader](https://github.com/darkreader/darkreader?tab=readme-ov-file#using-dark-reader-on-a-website) |
-| `target_blank`* | Array | `[]` | Controls which links open in new tab* (`target="_blank"`). Values: `header`, `main`, `footer` |
+| `target_blank` | Array | `[]` | Controls which links open in new tab* (`target="_blank"`). Values: `header`, `main`, `footer` |
 
 > \* Links that point to sections within the current page will always open in the same tab
 
