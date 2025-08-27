@@ -128,15 +128,9 @@
                 }
             });
         }
-        {% if site.target_blank contains "header" %}
-        setTarget('header');
-        {% endif %}
-        {% if site.target_blank contains "main" %}
-        setTarget('main');
-        {% endif %}
-        {% if site.target_blank contains "footer" %}
-        setTarget('footer');
-        {% endif %}
+        {% if site.target_blank contains "header" %}setTarget('header');{% endif %}
+        {% if site.target_blank contains "main"   %}setTarget('main');{% endif %}
+        {% if site.target_blank contains "footer" %}setTarget('footer');{% endif %}
     </script>
     {% endif %}
 </body>
