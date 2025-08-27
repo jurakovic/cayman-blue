@@ -101,8 +101,29 @@
     {% if site.target_blank %}
     <script>
         function setTarget(element) {
+            // Get the current page URL without hash
+            const currentPageUrl = window.location.href.split('#')[0];
+
             document.querySelectorAll(`${element} a`).forEach(link => {
                 if (!link.hasAttribute('target')) {
+                    const href = link.getAttribute('href');
+
+                    // Skip if it's a hash-only link like "#section"
+                    if (href && href.startsWith('#')) {
+                        return;
+                    }
+
+                    // Skip if it's a link to current page with hash
+                    if (href && href.includes('#')) {
+                        const linkUrl = new URL(href, window.location.href);
+                        const linkWithoutHash = linkUrl.href.split('#')[0];
+
+                        // If the URL without hash matches current page, don't add target="_blank"
+                        if (linkWithoutHash === currentPageUrl) {
+                            return;
+                        }
+                    }
+
                     link.setAttribute('target', '_blank');
                 }
             });
