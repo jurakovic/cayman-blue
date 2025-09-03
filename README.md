@@ -21,7 +21,6 @@ Key differences ([compare](https://github.com/jurakovic/cayman-blue/compare/mast
 |--------|------|---------|-------------|
 | `show_header` | Boolean | `true` | Controls visibility of the page header |
 | `show_footer` | Boolean | `true` | Controls visibility of the page footer |
-| `custom_css` | Boolean | `false` | Enables loading of custom CSS file |
 | `dark_theme` | Boolean | `false` | Enables dark theme support via [Dark Reader](https://github.com/darkreader/darkreader?tab=readme-ov-file#using-dark-reader-on-a-website) |
 | `target_blank` | Array | `[]` | Controls which links open in new tab* (`target="_blank"`). Values: `header`, `main`, `footer` |
 
@@ -35,7 +34,6 @@ description: My site description
 remote_theme: jurakovic/cayman-blue
 show_header: true
 show_footer: true
-custom_css: true
 dark_theme: true
 target_blank: [main, footer]
 ```
