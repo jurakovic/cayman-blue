@@ -24,7 +24,7 @@ Key differences ([compare](https://github.com/jurakovic/cayman-blue/compare/mast
 | `dark_theme` | Boolean | `false` | Enables dark theme support via [Dark Reader](https://github.com/darkreader/darkreader?tab=readme-ov-file#using-dark-reader-on-a-website) |
 | `target_blank` | Array | `[]` | Controls which links open in new tab* (`target="_blank"`). Values: `header`, `main`, `footer` |
 
-> \* Links that point to sections within the current page will always open in the same tab
+> \* Links that point to the same host will always open in the same tab
 
 #### Example Configuration
 
