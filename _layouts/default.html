@@ -41,7 +41,14 @@
 <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
-    {% if site.show_header or site.show_header == nil %}
+    {% if page.show_header != nil %}
+      {% assign _show_header = page.show_header %}
+    {% elsif site.show_header != nil %}
+      {% assign _show_header = site.show_header %}
+    {% else %}
+      {% assign _show_header = true %}
+    {% endif %}
+    {% if _show_header %}
     <header class="page-header" role="banner">
         <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
@@ -59,7 +66,14 @@
         {{ content }}
     </main>
 
-    {% if site.show_footer or site.show_footer == nil %}
+    {% if page.show_footer != nil %}
+      {% assign _show_footer = page.show_footer %}
+    {% elsif site.show_footer != nil %}
+      {% assign _show_footer = site.show_footer %}
+    {% else %}
+      {% assign _show_footer = true %}
+    {% endif %}
+    {% if _show_footer %}
     <footer class="site-footer">
         {% if site.dark_theme %}
         <a id="toggle-theme-btn" class="toggle-theme">Theme: 🌗</a>
@@ -99,6 +113,8 @@
                 });
                 themeBtn.innerHTML = 'Theme: 🌗';
             }
+
+            document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
         }
 
         function toggleTheme() {
@@ -119,6 +135,7 @@
         function setTarget(element) {
             // Get the current page URL without hash
             const currentPageUrl = window.location.href.split('#')[0];
+            const currentHost = window.location.host;
 
             document.querySelectorAll(`${element} a`).forEach(link => {
                 if (!link.hasAttribute('target')) {
@@ -129,15 +146,24 @@
                         return;
                     }
 
-                    // Skip if it's a link to current page with hash
-                    if (href && href.includes('#')) {
+                    try {
                         const linkUrl = new URL(href, window.location.href);
-                        const linkWithoutHash = linkUrl.href.split('#')[0];
 
-                        // If the URL without hash matches current page, don't add target="_blank"
-                        if (linkWithoutHash === currentPageUrl) {
+                        // Skip if it's a link to the same host
+                        if (linkUrl.host === currentHost) {
                             return;
                         }
+
+                        // Skip if it's a link to current page with hash
+                        if (href.includes('#')) {
+                            const linkWithoutHash = linkUrl.href.split('#')[0];
+                            if (linkWithoutHash === currentPageUrl) {
+                                return;
+                            }
+                        }
+                    } catch (e) {
+                        // Invalid URL (rare cases, like malformed href), skip safely
+                        return;
                     }
 
                     link.setAttribute('target', '_blank');
