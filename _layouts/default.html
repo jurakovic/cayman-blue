@@ -41,8 +41,13 @@
 <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
-    {% assign _show_header = page.show_header | default: site.show_header | default: true %}
-    {% if _show_header %}
+    {% if page.show_header != nil %}
+      {% assign _show_header = page.show_header %}
+    {% elsif site.show_header != nil %}
+      {% assign _show_header = site.show_header %}
+    {% else %}
+      {% assign _show_header = true %}
+    {% endif %}
     <header class="page-header" role="banner">
         <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
@@ -60,8 +65,13 @@
         {{ content }}
     </main>
 
-    {% assign _show_footer = page.show_footer | default: site.show_footer | default: true %}
-    {% if _show_footer %}
+    {% if page.show_footer != nil %}
+      {% assign _show_footer = page.show_footer %}
+    {% elsif site.show_footer != nil %}
+      {% assign _show_footer = site.show_footer %}
+    {% else %}
+      {% assign _show_footer = true %}
+    {% endif %}
     <footer class="site-footer">
         {% if site.dark_theme %}
         <a id="toggle-theme-btn" class="toggle-theme">Theme: 🌗</a>
